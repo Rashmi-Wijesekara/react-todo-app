@@ -1,23 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import db from './firebase'
+import firebase from 'firebase/compat/app'
 
 function App() {
+  const [todos, setTodos] = useState([])
+  const [input, setInput] = useState('')
+
+  const addTodos = (event)=>{
+    setTodos([...todos, input])
+    
+    console.log(todos)
+    setInput("")
+    event.preventDefault()
+  }
+
+  const handleInputChange = (event)=>{
+    setInput(event.target.value)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>ToDo App</h1>
+
+      <form>
+        <input value={input} onChange= {handleInputChange}/>
+        <button
+          onClick= {addTodos}
+          type="submit"
+          disabled={!input}
+        >SAVE</button>
+      </form>
+
+      <ul>
+        {todos.map(
+          todo => (
+            <li>{todo}</li>
+          )
+        )}
+      </ul>
     </div>
   );
 }
