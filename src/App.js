@@ -1,16 +1,15 @@
 import './App.css';
 import React, {useState, useEffect} from 'react';
-import db from './firebase'
-import firebase from 'firebase/compat/app'
+import { Button, FormControl, Input, InputLabel } from '@mui/material';
+import TodoItem from "./TodoItem"
 
 function App() {
   const [todos, setTodos] = useState([])
   const [input, setInput] = useState('')
 
+  console.log(todos)
   const addTodos = (event)=>{
     setTodos([...todos, input])
-    
-    console.log(todos)
     setInput("")
     event.preventDefault()
   }
@@ -23,19 +22,28 @@ function App() {
     <div className="App">
       <h1>ToDo App</h1>
 
+
       <form>
-        <input value={input} onChange= {handleInputChange}/>
-        <button
+        <FormControl>
+          <InputLabel>✅Write a Todo</InputLabel>
+          <Input value={input} onChange= {handleInputChange}/>
+        </FormControl>
+        
+        <Button
           onClick= {addTodos}
           type="submit"
           disabled={!input}
-        >SAVE</button>
+          color= "primary"
+          variant="contained"
+        >
+          Add
+        </Button>
       </form>
 
       <ul>
         {todos.map(
           todo => (
-            <li>{todo}</li>
+            <TodoItem text={todo}/>
           )
         )}
       </ul>

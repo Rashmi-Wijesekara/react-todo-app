@@ -1,0 +1,12 @@
+.list__item__text {
+	align-items: left !important;
+}
+
+.MuiListItemButton-dense {
+	margin: 0 auto !important;
+}
+
+.MuiListItemText {
+	align-items: left !important;
+}
+/* not working */
